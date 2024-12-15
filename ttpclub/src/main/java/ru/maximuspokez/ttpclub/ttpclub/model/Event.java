@@ -1,21 +1,44 @@
 package ru.maximuspokez.ttpclub.ttpclub.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
+
+@Entity
+@Table(name = "event")
 public class Event {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
   private String name;
-  private String type;
+
+  @Enumerated(EnumType.STRING)
+  private EventType type;
+
   private String description;
+
+  @Column(name = "start_time")
   private LocalDateTime startTime;
+
+  @Column(name = "end_time")
   private LocalDateTime endTime;
+
+  @Column(name = "max_participants")
   private Integer maxParticipants;
+
+  @Column(name = "current_participants")
   private Integer currentParticipants = 0;
 
+  public enum EventType {
+    TRAINING,
+    TOURNAMENT
+  }
+
   public Event() {}
-  public Event (String name, String type, LocalDateTime startTime, LocalDateTime endTime, String location, Integer maxParticipants) {
+  public Event (String name, EventType type, LocalDateTime startTime, LocalDateTime endTime, String location, Integer maxParticipants) {
     this.name = name;
     this.type = type;
     this.startTime = startTime;
@@ -39,11 +62,11 @@ public class Event {
     this.name = name;
   }
 
-  public String getType() {
+  public EventType getType() {
     return type;
   }
 
-  public void setType(String type) {
+  public void setType(EventType type) {
     this.type = type;
   }
 

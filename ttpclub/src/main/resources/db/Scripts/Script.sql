@@ -1,4 +1,4 @@
-create table "user" (
+create table if not exists "user" (
     id bigint generated always as identity primary key, 
     username varchar(50) not null unique,              
     email varchar(100) not null unique,                
@@ -8,7 +8,7 @@ create table "user" (
     rating integer default 0 not null  
 );
 
-create table UserRating (
+create table if not exists user_raiting (
     id bigint generated always as identity primary key,   
     user_id bigint not null,                              
     rating integer not null,                             
@@ -19,10 +19,10 @@ create table UserRating (
 
 ----------------------------------------------------------------------
 
-create table Event (
+create table if not exists event (
     id bigint generated always as identity primary key, 
     name varchar(100) not null,                       
-    type varchar(50) not null check (type in ('training', 'tournament')),                      
+    type varchar(50) not null check (type in ('TRAINING', 'TOURNAMENT')),                      
     description text null,                           
     start_time timestamp not null,                   
     end_time timestamp not null,                                         
@@ -30,7 +30,7 @@ create table Event (
     current_participants integer default 0 not null
 );
 
-create table Tournament (
+create table if not exists tournament (
     event_id bigint primary key,                         
     prize_pool numeric(10, 2) not null,                  
     is_team_based boolean default false not null,        
@@ -39,7 +39,7 @@ create table Tournament (
     CONSTRAINT fk_event FOREIGN KEY (event_id) REFERENCES Event(id) on delete cascade
 );
 
-create table Training (
+create table if not exists training (
     event_id bigint primary key,                        
     coach_id bigint not null,                            
     training_type varchar(50) not null,                  
@@ -48,7 +48,7 @@ create table Training (
 );
 
 
-create table Equipment (
+create table if not exists equipment (
     id bigint generated always as identity primary key, 
     name varchar(100) not null,                        
     type varchar(50) not null,                        
@@ -58,7 +58,7 @@ create table Equipment (
     created_at timestamp default current_timestamp not null 
 );
 
-create table Booking (
+create table if not exists booking (
     id bigint generated always as identity primary key,
     user_id bigint not null,                                                        
     equipment_id bigint null,                        
@@ -71,7 +71,7 @@ create table Booking (
     CONSTRAINT fk_equipment FOREIGN KEY (equipment_id) REFERENCES Equipment(id) on delete set null
 );
 
-create table Registration (
+create table if not exists registration (
     id bigint generated always as identity primary key,
     user_id bigint not null,                           
     event_id bigint not null,                          

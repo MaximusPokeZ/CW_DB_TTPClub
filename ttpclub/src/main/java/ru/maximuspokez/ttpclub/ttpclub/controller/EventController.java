@@ -33,12 +33,12 @@ public class EventController {
     return eventService.getEventById(id);
   }
 
-  @PutMapping("update_student")
+  @PutMapping("update_event/{id}")
   public Event updateEventById(@PathVariable Long id, @RequestBody Event event) {
     return eventService.updateEvent(id, event);
   }
 
-  @DeleteMapping("delete_student/{id}")
+  @DeleteMapping("delete_event/{id}")
   public void deleteEventById(@PathVariable Long id) {
     eventService.deleteEvent(id);
   }
