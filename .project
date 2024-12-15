@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>CW_TTPClub</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+		<nature>org.jkiss.dbeaver.DBeaverNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>db</name>
+			<type>2</type>
+			<location>//Users/vladimirzaslavtsev/University/DBMS/CW_DB_Table_tennus_club/ttpclub/src/main/resources/db/</location>
+		</link>
+	</linkedResources>
+</projectDescription>
