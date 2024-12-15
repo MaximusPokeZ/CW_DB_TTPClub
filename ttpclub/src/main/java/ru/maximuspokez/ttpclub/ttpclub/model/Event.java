@@ -11,7 +11,6 @@ public class Event {
   private String description;
   private LocalDateTime startTime;
   private LocalDateTime endTime;
-  private String location;
   private Integer maxParticipants;
   private Integer currentParticipants = 0;
 
@@ -21,7 +20,6 @@ public class Event {
     this.type = type;
     this.startTime = startTime;
     this.endTime = endTime;
-    this.location = location;
     this.maxParticipants = maxParticipants;
   }
 
@@ -73,14 +71,6 @@ public class Event {
     this.endTime = endTime;
   }
 
-  public String getLocation() {
-    return location;
-  }
-
-  public void setLocation(String location) {
-    this.location = location;
-  }
-
   public Integer getMaxParticipants() {
     return maxParticipants;
   }
@@ -105,7 +95,6 @@ public class Event {
             ", type='" + type + '\'' +
             ", startTime=" + startTime +
             ", endTime=" + endTime +
-            ", location='" + location + '\'' +
             ", maxParticipants=" + maxParticipants +
             ", currentParticipants=" + currentParticipants +
             '}';

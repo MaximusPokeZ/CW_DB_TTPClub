@@ -1,4 +1,4 @@
-package ru.maximuspokez.ttpclub.ttpclub.interfaces;
+package ru.maximuspokez.ttpclub.ttpclub.service;
 
 import ru.maximuspokez.ttpclub.ttpclub.model.Event;
 
