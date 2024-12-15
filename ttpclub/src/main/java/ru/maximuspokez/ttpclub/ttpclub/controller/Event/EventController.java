@@ -1,9 +1,9 @@
-package ru.maximuspokez.ttpclub.ttpclub.controller;
+package ru.maximuspokez.ttpclub.ttpclub.controller.Event;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.maximuspokez.ttpclub.ttpclub.service.EventService;
-import ru.maximuspokez.ttpclub.ttpclub.model.Event;
+import ru.maximuspokez.ttpclub.ttpclub.service.Event.EventService;
+import ru.maximuspokez.ttpclub.ttpclub.model.Event.Event;
 
 import java.util.List;
 

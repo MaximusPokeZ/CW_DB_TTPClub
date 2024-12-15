@@ -1,9 +1,9 @@
-package ru.maximuspokez.ttpclub.ttpclub.service.impl;
+package ru.maximuspokez.ttpclub.ttpclub.service.Event.impl;
 
 import org.springframework.stereotype.Service;
-import ru.maximuspokez.ttpclub.ttpclub.model.Event;
-import ru.maximuspokez.ttpclub.ttpclub.repository.EventRepository;
-import ru.maximuspokez.ttpclub.ttpclub.service.EventService;
+import ru.maximuspokez.ttpclub.ttpclub.model.Event.Event;
+import ru.maximuspokez.ttpclub.ttpclub.repository.Event.EventRepository;
+import ru.maximuspokez.ttpclub.ttpclub.service.Event.EventService;
 
 import java.util.List;
 import java.util.Optional;

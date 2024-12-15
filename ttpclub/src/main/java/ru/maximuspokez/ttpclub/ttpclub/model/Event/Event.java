@@ -1,6 +1,5 @@
-package ru.maximuspokez.ttpclub.ttpclub.model;
+package ru.maximuspokez.ttpclub.ttpclub.model.Event;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;

@@ -1,7 +1,8 @@
 create table if not exists "user" (
     id bigint generated always as identity primary key, 
     username varchar(50) not null unique,              
-    email varchar(100) not null unique,                
+    email varchar(100) not null unique,   
+    phone varchar(30) not null unique, 
     password_hash varchar(255) not null,  -- Хэш пароля
     created_at timestamp default current_timestamp not null,
     role varchar(20) not null check (role in ('player', 'coach', 'admin')), -- Роль пользователя
@@ -84,5 +85,6 @@ create table if not exists registration (
 
 ----------------------------------------------------------------------
 
+select * from "event" e 
 
 

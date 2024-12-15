@@ -1,6 +1,6 @@
-package ru.maximuspokez.ttpclub.ttpclub.service;
+package ru.maximuspokez.ttpclub.ttpclub.service.Event;
 
-import ru.maximuspokez.ttpclub.ttpclub.model.Event;
+import ru.maximuspokez.ttpclub.ttpclub.model.Event.Event;
 
 import java.util.List;
 

@@ -1,10 +1,12 @@
-package ru.maximuspokez.ttpclub.ttpclub.repository;
+package ru.maximuspokez.ttpclub.ttpclub.repository.Event;
 
-import ru.maximuspokez.ttpclub.ttpclub.model.Event;
+import org.springframework.stereotype.Repository;
+import ru.maximuspokez.ttpclub.ttpclub.model.Event.Event;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class EventReposityDAO {
   private final List<Event> events = new ArrayList<>();
 
