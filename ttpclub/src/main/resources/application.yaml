@@ -13,7 +13,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
-  sql:
-    init:
-      mode: always
-      data-locations: classpath:db/Scripts/Script.sql
+  flyway:
+    baseline-on-migrate: true
+    enabled: true
+    locations: classpath:db/migration

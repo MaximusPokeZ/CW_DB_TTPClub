@@ -1,6 +1,8 @@
 package ru.maximuspokez.ttpclub.ttpclub.model.User;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -28,6 +30,12 @@ public class User {
 
   @Column(nullable = false)
   private String role;
+
+  @Column(nullable = false)
+  private LocalDate birthDate;
+
+  @Column(nullable = false)
+  private Integer age = 0;
 
   @Column(nullable = false)
   private Integer rating = 0;
@@ -96,6 +104,22 @@ public class User {
 
   public void setRole(String role) {
     this.role = role;
+  }
+
+  public LocalDate getBirthDate() {
+    return birthDate;
+  }
+
+  public void setBirthDate(LocalDate birthDate) {
+    this.birthDate = birthDate;
+  }
+
+  public Integer getAge() {
+    return age;
+  }
+
+  public void setAge(Integer age) {
+    this.age = age;
   }
 
   public Integer getRating() {

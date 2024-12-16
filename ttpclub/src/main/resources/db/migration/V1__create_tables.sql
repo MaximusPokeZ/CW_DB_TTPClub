@@ -6,6 +6,8 @@ create table if not exists "user" (
     password_hash varchar(255) not null,  -- Хэш пароля
     created_at timestamp default current_timestamp not null,
     role varchar(20) not null check (role in ('player', 'coach', 'admin')), -- Роль пользователя
+    birth_date date not null,
+    age integer default 0 not null,
     rating integer default 0 not null  
 );
 
@@ -84,7 +86,5 @@ create table if not exists registration (
 );
 
 ----------------------------------------------------------------------
-
-select * from "event" e 
 
 
