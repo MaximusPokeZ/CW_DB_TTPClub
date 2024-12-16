@@ -12,7 +12,20 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: ttpclub-server
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/ttpclub_db
+      SPRING_DATASOURCE_USERNAME: admin_ttpclub
+      SPRING_DATASOURCE_PASSWORD: pc101w
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
 volumes:
   postgres_data:
-
-
