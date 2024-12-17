@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./Register.css"; // Подключение CSS
+import { useNavigate } from "react-router-dom";
+import "./Register.css";
 
 const Register = () => {
     const [username, setUsername] = useState("");
@@ -8,7 +9,9 @@ const Register = () => {
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const [role, setRole] = useState("player");
-    const [birthDate, setBirthDate] = useState(""); // Новый state для даты рождения
+    const [birthDate, setBirthDate] = useState("");
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -19,13 +22,14 @@ const Register = () => {
             phone,
             password,
             role,
-            birthDate, // Добавляем birthDate в отправляемые данные
+            birthDate,
         };
 
         try {
             const response = await axios.post("http://localhost:8080/api/v1/user/register", userData);
             if (response.status === 200) {
                 console.log("User registered successfully");
+                navigate("/");
                 alert("Registration successful!");
             } else {
                 console.log("Registration failed");
@@ -82,7 +86,6 @@ const Register = () => {
                     <select value={role} onChange={(e) => setRole(e.target.value)}>
                         <option value="player">Player</option>
                         <option value="coach">Coach</option>
-                        <option value="admin">Admin</option>
                     </select>
                 </div>
                 <div className="form-group">
