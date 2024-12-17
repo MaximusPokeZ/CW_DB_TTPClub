@@ -14,7 +14,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   app:
-    build: .
+    build: ./ttpclub
     container_name: ttpclub-server
     restart: always
     environment:
@@ -26,6 +26,15 @@ services:
       - "8080:8080"
     depends_on:
       - postgres
+  
+  client:
+    build: ./client_ttpclub
+    container_name: ttpclub_client
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - app
 
 volumes:
   postgres_data:

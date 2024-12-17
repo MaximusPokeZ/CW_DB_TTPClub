@@ -40,6 +40,9 @@ public class User {
   @Column(nullable = false)
   private Integer rating = 0;
 
+  @Transient
+  private String password;
+
   public User() {}
 
   public User(String username, String email, String phone, String passwordHash, String role) {
@@ -128,6 +131,14 @@ public class User {
 
   public void setRating(Integer rating) {
     this.rating = rating;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 
   @Override

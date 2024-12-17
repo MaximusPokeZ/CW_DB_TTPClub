@@ -1,6 +1,8 @@
 package ru.maximuspokez.ttpclub.ttpclub.service.User.impl;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.maximuspokez.ttpclub.ttpclub.model.User.User;
@@ -13,9 +15,12 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
+  private final PasswordEncoder passwordEncoder;
+
   private final UserRepository userRepository;
 
-  public UserServiceImpl(UserRepository userRepository) {
+  public UserServiceImpl(PasswordEncoder passwordEncoder, UserRepository userRepository) {
+    this.passwordEncoder = passwordEncoder;
     this.userRepository = userRepository;
   }
 
@@ -58,6 +63,8 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public User createUser(User user) {
+    String encodedPassword = passwordEncoder.encode(user.getPassword());
+    user.setPasswordHash(encodedPassword);
     return userRepository.save(user);
   }
 
