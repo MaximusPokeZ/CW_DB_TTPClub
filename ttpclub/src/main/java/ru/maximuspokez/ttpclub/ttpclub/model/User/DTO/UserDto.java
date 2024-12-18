@@ -13,6 +13,7 @@ public class UserDto {
   private String phone;
   private String role;
   private Integer age;
+  private Integer rating;
 
   public UserDto(User user) {
     this.id = user.getId();
@@ -21,6 +22,7 @@ public class UserDto {
     this.phone = user.getPhone();
     this.role = user.getRole();
     this.age = Period.between(user.getBirthDate(), LocalDate.now()).getYears();
+    this.rating = user.getRating();
   }
 
   public Long getId() {
@@ -69,5 +71,13 @@ public class UserDto {
 
   public void setAge(Integer age) {
     this.age = age;
+  }
+
+  public Integer getRating() {
+    return rating;
+  }
+
+  public void setRating(Integer rating) {
+    this.rating = rating;
   }
 }

@@ -22,7 +22,8 @@ const LoginPage = () => {
             if (response.status === 200) {
                 console.log("Login successfuuuuuuuuuuul");
                 alert("Login successful!");
-                navigate("/");
+                localStorage.setItem("userEmail", email);
+                navigate("/main");
             } else {
                 console.log("Invalid credentials");
                 alert("Invalid email or password");
