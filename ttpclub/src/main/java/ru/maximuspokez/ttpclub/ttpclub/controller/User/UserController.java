@@ -4,10 +4,12 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.maximuspokez.ttpclub.ttpclub.model.User.DTO.UserDto;
 import ru.maximuspokez.ttpclub.ttpclub.model.User.User;
 import ru.maximuspokez.ttpclub.ttpclub.service.User.UserService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -20,9 +22,9 @@ public class UserController {
   }
 
   @GetMapping
-  public ResponseEntity<List<User>> getUsers() {
+  public ResponseEntity<List<UserDto>> getUsers() {
     List<User> users = userService.getUsers();
-    return ResponseEntity.ok(users);
+    return ResponseEntity.ok(users.stream().map(UserDto::new).collect(Collectors.toList()));
   }
 
   @PostMapping("/register")

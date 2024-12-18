@@ -7,7 +7,6 @@ create table if not exists "user" (
     created_at timestamp default current_timestamp not null,
     role varchar(20) not null check (role in ('player', 'coach', 'admin')), -- Роль пользователя
     birth_date date not null,
-    age integer default 0 not null,
     rating integer default 0 not null  
 );
 
@@ -29,8 +28,7 @@ create table if not exists event (
     description text null,                           
     start_time timestamp not null,                   
     end_time timestamp not null,                                         
-    max_participants integer not null,               
-    current_participants integer default 0 not null
+    max_participants integer not null
 );
 
 create table if not exists tournament (
@@ -84,7 +82,3 @@ create table if not exists registration (
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES "user"(id) on delete cascade,
     CONSTRAINT fk_event FOREIGN KEY (event_id) REFERENCES Event(id) on delete cascade
 );
-
-----------------------------------------------------------------------
-
-

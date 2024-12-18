@@ -34,7 +34,7 @@ public class User {
   @Column(nullable = false)
   private LocalDate birthDate;
 
-  @Column(nullable = false)
+  @Transient
   private Integer age = 0;
 
   @Column(nullable = false)

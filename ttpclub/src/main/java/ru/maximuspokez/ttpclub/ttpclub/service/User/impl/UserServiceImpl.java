@@ -9,6 +9,8 @@ import ru.maximuspokez.ttpclub.ttpclub.model.User.User;
 import ru.maximuspokez.ttpclub.ttpclub.repository.User.UserRepository;
 import ru.maximuspokez.ttpclub.ttpclub.service.User.UserService;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,8 +66,17 @@ public class UserServiceImpl implements UserService {
   @Override
   public User createUser(User user) {
     String encodedPassword = passwordEncoder.encode(user.getPassword());
+    Integer age = calculateAge(user.getBirthDate());
+    user.setAge(age);
     user.setPasswordHash(encodedPassword);
     return userRepository.save(user);
+  }
+
+  private Integer calculateAge(LocalDate birthDate) {
+    if (birthDate == null) {
+      throw new IllegalArgumentException("Birth date cannot be null");
+    }
+    return Period.between(birthDate, LocalDate.now()).getYears();
   }
 
   @Override

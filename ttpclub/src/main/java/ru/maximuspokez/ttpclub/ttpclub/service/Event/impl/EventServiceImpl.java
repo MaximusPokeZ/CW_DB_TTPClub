@@ -46,7 +46,6 @@ public class EventServiceImpl implements EventService {
     updatedEvent.setStartTime(event.getStartTime());
     updatedEvent.setEndTime(event.getEndTime());
     updatedEvent.setMaxParticipants(event.getMaxParticipants());
-    updatedEvent.setCurrentParticipants(event.getCurrentParticipants());
     return eventRepository.save(updatedEvent);
   }
 

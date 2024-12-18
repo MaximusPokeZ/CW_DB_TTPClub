@@ -28,9 +28,6 @@ public class Event {
   @Column(name = "max_participants")
   private Integer maxParticipants;
 
-  @Column(name = "current_participants")
-  private Integer currentParticipants = 0;
-
   public enum EventType {
     TRAINING,
     TOURNAMENT
@@ -101,13 +98,6 @@ public class Event {
     this.maxParticipants = maxParticipants;
   }
 
-  public Integer getCurrentParticipants() {
-    return currentParticipants;
-  }
-
-  public void setCurrentParticipants(Integer currentParticipants) {
-    this.currentParticipants = currentParticipants;
-  }
 
   @Override
   public String toString() {
@@ -118,7 +108,6 @@ public class Event {
             ", startTime=" + startTime +
             ", endTime=" + endTime +
             ", maxParticipants=" + maxParticipants +
-            ", currentParticipants=" + currentParticipants +
             '}';
   }
 }
