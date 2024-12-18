@@ -34,52 +34,32 @@ public class UserController {
 
   @GetMapping("/{id}")
   public ResponseEntity<User> getUserById(@PathVariable Long id) {
-    try {
-      User user = userService.getUserById(id);
-      return ResponseEntity.ok(user);
-    } catch (EntityNotFoundException e) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-    }
+    User user = userService.getUserById(id);
+    return ResponseEntity.ok(user);
   }
 
   @GetMapping("get_email/{email}")
   public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
-    try {
-      User user = userService.getUserByEmail(email);
-      return ResponseEntity.ok(user);
-    } catch (EntityNotFoundException e) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-    }
+    User user = userService.getUserByEmail(email);
+    return ResponseEntity.ok(user);
   }
 
   @GetMapping("get_username/{username}")
   public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
-    try {
-      User user = userService.getUserByUsername(username);
-      return ResponseEntity.ok(user);
-    } catch (EntityNotFoundException e) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-    }
+    User user = userService.getUserByUsername(username);
+    return ResponseEntity.ok(user);
   }
 
   @GetMapping("get_phone/{phone}")
   public ResponseEntity<User> getUserByPhone(@PathVariable String phone) {
-    try {
-      User user = userService.getUserByPhone(phone);
-      return ResponseEntity.ok(user);
-    } catch (EntityNotFoundException e) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-    }
+    User user = userService.getUserByPhone(phone);
+    return ResponseEntity.ok(user);
   }
 
   @PutMapping("update_user/{id}")
   public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
-    try {
       User updatedUser = userService.updateUser(id, user);
       return ResponseEntity.ok(updatedUser);
-    } catch (EntityNotFoundException e) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-    }
   }
 
   @DeleteMapping("delete_user/{id}")
