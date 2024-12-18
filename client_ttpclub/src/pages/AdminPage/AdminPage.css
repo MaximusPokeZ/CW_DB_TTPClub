@@ -1,0 +1,70 @@
+/* AdminPage.css */
+
+.admin-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f4f4f9;
+    font-family: Arial, sans-serif;
+    color: #333;
+    min-height: 100vh;
+}
+
+.admin-page-container h1 {
+    font-size: 2.5rem;
+    color: #4a90e2;
+    margin-bottom: 20px;
+}
+
+.admin-info {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.admin-info p {
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+.admin-info strong {
+    font-weight: bold;
+    color: #4a90e2;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.admin-actions button {
+    background-color: #4a90e2;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.admin-actions button:hover {
+    background-color: #357abd;
+}
+
+.admin-actions button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.5);
+}
+
+.admin-actions button:active {
+    background-color: #2d6699;
+}
