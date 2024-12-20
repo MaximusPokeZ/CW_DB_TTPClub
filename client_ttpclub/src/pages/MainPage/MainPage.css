@@ -74,3 +74,55 @@
     text-align: center;
     background-color: rgba(255, 255, 255, 0.8);
 }
+
+.gallery-scroll {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 10px;
+}
+
+.gallery-placeholder {
+    width: 150px;
+    height: 150px;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: #333;
+    border-radius: 10px;
+}
+
+.team-members {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.team-member {
+    text-align: center;
+}
+
+.team-placeholder {
+    width: 100px;
+    height: 100px;
+    background-color: #ddd;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    color: #333;
+}
+
+.club-rules ul {
+    list-style: disc;
+    margin-left: 20px;
+}
+
+.club-rules li {
+    margin-bottom: 10px;
+}
+

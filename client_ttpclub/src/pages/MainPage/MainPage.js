@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { axiosInstance } from "../../config/Axios/axiosConfig"
 import "./MainPage.css";
 
 const MainPage = () => {
@@ -16,7 +16,7 @@ const MainPage = () => {
         }
         const fetchUserData = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/api/v1/user/get_email/${email}`);
+                const response = await axiosInstance.get(`http://localhost:8080/api/v1/user/get_email/${email}`);
                 setUsername(response.data.username);
                 setRole(response.data.role);
             } catch (error) {
@@ -77,7 +77,50 @@ const MainPage = () => {
                     <h2>Рейтинг пользователей</h2>
                     {/* Добавьте компонент или код для отображения рейтинга */}
                 </div>
+
+                {/* Галерея */}
+                <div className="gallery">
+                    <h2>Галерея</h2>
+                    <div className="gallery-scroll">
+                        {Array.from({length: 5}).map((_, index) => (
+                            <div key={index} className="gallery-placeholder">
+                                Фото {index + 1}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Наша команда */}
+                <div className="our-team">
+                    <h2>Наша команда</h2>
+                    <div className="team-members">
+                        {[
+                            {name: "Иван Иванов", role: "Главный тренер"},
+                            {name: "Ольга Смирнова", role: "Ассистент тренера"},
+                            {name: "Максим Петров", role: "Тренер"},
+                        ].map((coach, index) => (
+                            <div key={index} className="team-member">
+                                <div className="team-placeholder">Фото</div>
+                                <h3>{coach.name}</h3>
+                                <p>{coach.role}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Правила клуба */}
+                <div className="club-rules">
+                    <h2>Правила клуба</h2>
+                    <ul>
+                        <li>Уважайте других участников и тренеров.</li>
+                        <li>Соблюдайте чистоту и порядок в помещении.</li>
+                        <li>Используйте оборудование только по назначению.</li>
+                        <li>Записывайтесь на тренировки и турниры заранее.</li>
+                        <li>Соблюдайте правила техники безопасности.</li>
+                    </ul>
+                </div>
             </main>
+
 
             <footer className="main-footer">
                 <p>Контакты: +7 916 624 06 71 | Адрес: г. Москва, ул. ПуПуПу, 52</p>
