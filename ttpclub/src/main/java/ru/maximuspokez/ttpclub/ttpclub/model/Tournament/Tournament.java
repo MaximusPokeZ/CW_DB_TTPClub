@@ -1,7 +1,6 @@
 package ru.maximuspokez.ttpclub.ttpclub.model.Tournament;
 
 import jakarta.persistence.*;
-import ru.maximuspokez.ttpclub.ttpclub.model.Event.Event;
 
 import java.math.BigDecimal;
 
@@ -21,11 +20,6 @@ public class Tournament {
 
   @Column(name = "max_participant_rating", nullable = false)
   private int maxParticipantRating;
-
-  @OneToOne
-  @MapsId
-  @JoinColumn(name = "event_id")
-  private Event event;
 
   public Long getEventId() {
     return eventId;
@@ -59,11 +53,14 @@ public class Tournament {
     this.maxParticipantRating = maxParticipantRating;
   }
 
-  public Event getEvent() {
-    return event;
+  @Override
+  public String toString() {
+    return "Tournament{" +
+            "eventId=" + eventId +
+            ", prizePool=" + prizePool +
+            ", isTeamBased=" + isTeamBased +
+            ", maxParticipantRating=" + maxParticipantRating +
+            '}';
   }
 
-  public void setEvent(Event event) {
-    this.event = event;
-  }
 }

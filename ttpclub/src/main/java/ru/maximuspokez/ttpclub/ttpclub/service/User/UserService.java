@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface UserService {
   List<User> getUsers();
+  List<User> getUsersSortedByRating();
   User getUserById(Long id);
   User getUserByEmail(String email);
   User getUserByPhone(String phone);

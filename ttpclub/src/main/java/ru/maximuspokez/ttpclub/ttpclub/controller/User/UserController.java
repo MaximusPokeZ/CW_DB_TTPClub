@@ -1,7 +1,5 @@
 package ru.maximuspokez.ttpclub.ttpclub.controller.User;
 
-import jakarta.persistence.EntityNotFoundException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.maximuspokez.ttpclub.ttpclub.model.User.DTO.UserDto;
@@ -24,6 +22,12 @@ public class UserController {
   @GetMapping
   public ResponseEntity<List<UserDto>> getUsers() {
     List<User> users = userService.getUsers();
+    return ResponseEntity.ok(users.stream().map(UserDto::new).collect(Collectors.toList()));
+  }
+
+  @GetMapping("/sorted_by_rating")
+  public ResponseEntity<List<UserDto>> getUsersByRating() {
+    List<User> users = userService.getUsersSortedByRating();
     return ResponseEntity.ok(users.stream().map(UserDto::new).collect(Collectors.toList()));
   }
 

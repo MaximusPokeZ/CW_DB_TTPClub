@@ -1,8 +1,12 @@
 package ru.maximuspokez.ttpclub.ttpclub.service.Tournament.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import ru.maximuspokez.ttpclub.ttpclub.model.Event.Event;
 import ru.maximuspokez.ttpclub.ttpclub.model.Tournament.DTO.TournamentDto;
 import ru.maximuspokez.ttpclub.ttpclub.model.Tournament.Tournament;
+import ru.maximuspokez.ttpclub.ttpclub.repository.Event.EventRepository;
 import ru.maximuspokez.ttpclub.ttpclub.repository.Tournament.TournamentRepository;
 import ru.maximuspokez.ttpclub.ttpclub.service.Tournament.TournamentsService;
 
@@ -13,8 +17,11 @@ public class TournamentsServiceImpl implements TournamentsService {
 
   private final TournamentRepository tournamentRepository;
 
-  public TournamentsServiceImpl(TournamentRepository tournamentRepository) {
+  private final EventRepository eventRepository;
+
+  public TournamentsServiceImpl(TournamentRepository tournamentRepository, EventRepository eventRepository) {
     this.tournamentRepository = tournamentRepository;
+    this.eventRepository = eventRepository;
   }
 
   @Override
@@ -27,12 +34,12 @@ public class TournamentsServiceImpl implements TournamentsService {
   private TournamentDto convertToDto(Tournament tournament) {
     return new TournamentDto(
             tournament.getEventId(),
-            tournament.getEvent().getName(),
+            eventRepository.findById(tournament.getEventId()).get().getName(),
             tournament.getPrizePool(),
             tournament.isTeamBased(),
             tournament.getMaxParticipantRating(),
-            tournament.getEvent().getStartTime(),
-            tournament.getEvent().getMaxParticipants()
+            eventRepository.findById(tournament.getEventId()).get().getStartTime(),
+            eventRepository.findById(tournament.getEventId()).get().getMaxParticipants()
     );
   }
 
@@ -51,8 +58,11 @@ public class TournamentsServiceImpl implements TournamentsService {
     return tournament;
   }
 
+  @Transactional
   @Override
   public Tournament createTournament(Tournament tournament) {
+    Event event = eventRepository.findById(tournament.getEventId())
+            .orElseThrow(() -> new EntityNotFoundException("Event not found"));
     return tournamentRepository.save(tournament);
   }
 
@@ -64,7 +74,6 @@ public class TournamentsServiceImpl implements TournamentsService {
     existingTournament.setPrizePool(tournament.getPrizePool());
     existingTournament.setTeamBased(tournament.isTeamBased());
     existingTournament.setMaxParticipantRating(tournament.getMaxParticipantRating());
-    existingTournament.setEvent(tournament.getEvent());
 
     return tournamentRepository.save(existingTournament);
   }
