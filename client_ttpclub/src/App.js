@@ -8,6 +8,7 @@ import AdminPage from "./pages/AdminPage/AdminPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import ManageUserPage from "./pages/AdminPage/ManageUsers/ManageUsersPage";
 import setupAxiosInstance from "./config/Axios/axiosConfig";
+import ManageEvent from "./pages/AdminPage/ManageTournaments/ManageEvent";
 
 const App = () => {
     const navigate = useNavigate();
@@ -30,6 +31,7 @@ const App = () => {
             <Route path="/admin/:username" element={<AdminPage />} />
             <Route path="/profile/:username" element={<ProfilePage />} />
             <Route path="/admin/:username/manage-users" element={<ManageUserPage />} />
+            <Route path="/admin/:username/manage-tournaments" element={<ManageEvent />} />
         </Routes>
     );
 };

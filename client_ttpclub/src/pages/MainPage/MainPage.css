@@ -46,10 +46,62 @@
 
 .tournaments-list,
 .ratings-list {
-    flex: 1;
-    background: rgba(255, 255, 255, 0.8);
+    margin-top: 30px;
     padding: 20px;
-    border-radius: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ratings-list h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.ratings-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.rating-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.rating-item:hover {
+    transform: scale(1.05);
+    background-color: #f1f1f1;
+}
+
+.rating-username {
+    font-weight: 600;
+    font-size: 18px;
+    color: #333;
+}
+
+.rating-value {
+    font-size: 16px;
+    color: #666;
+    font-weight: 500;
+}
+
+.rating-item:nth-child(odd) {
+    background-color: #f7f7f7;
+}
+
+/* Анимация для пустых данных (если еще идет загрузка) */
+p {
+    font-size: 16px;
+    color: #777;
+    font-style: italic;
 }
 
 .center-actions {
@@ -75,24 +127,60 @@
     background-color: rgba(255, 255, 255, 0.8);
 }
 
-.gallery-scroll {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);  /* 3 колонки одинаковой ширины */
+    grid-gap: 20px;
     padding: 10px;
 }
 
-.gallery-placeholder {
-    width: 150px;
-    height: 150px;
-    background-color: #ddd;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    color: #333;
-    border-radius: 10px;
+.gallery div {
+    display: contents;  /* Обеспечивает, чтобы изображения внутри div занимали нужное пространство */
 }
+
+.gallery div img {
+    width: 100%;  /* Картинка растягивается на всю ширину родительского контейнера */
+    height: auto;  /* Поддерживаем пропорции изображения */
+    filter: grayscale(100%);
+    transition: transform 0.5s;
+}
+
+.gallery div img:hover {
+    filter: grayscale(0);
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.gallery::-webkit-scrollbar {
+    display: none;
+}
+
+.gallery-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 10% auto;
+    text-align: center; /* Центрирование заголовка */
+}
+
+.gallery-title {
+    font-family: 'Arial', sans-serif; /* Используем красивый шрифт */
+    font-size: 36px; /* Размер шрифта */
+    font-weight: bold; /* Сделаем жирным */
+    color: #2c3e50; /* Цвет шрифта */
+    margin-bottom: 30px; /* Отступ снизу */
+    text-transform: uppercase; /* Сделаем заголовок прописными буквами */
+    letter-spacing: 2px; /* Расстояние между буквами */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Легкая тень для текста */
+}
+
+#backBtn, #nextBtn {
+    width: 50px;
+    cursor: pointer;
+    margin: 40px;
+}
+
 
 .team-members {
     display: flex;
@@ -116,13 +204,53 @@
     font-size: 12px;
     color: #333;
 }
+.club-rules {
+    background-color: #f8f9fa; /* Светлый фон для контраста */
+    padding: 20px 30px; /* Добавляем отступы внутри блока */
+    border-radius: 10px; /* Сглаживаем углы блока */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Легкая тень вокруг блока */
+    margin-bottom: 40px; /* Отступ снизу, чтобы создать пространство между блоками */
+}
+
+.club-rules h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px; /* Отступ снизу, чтобы разделить заголовок и список */
+    text-align: center; /* Центрируем заголовок */
+    text-transform: uppercase; /* Преобразуем заголовок в верхний регистр */
+    letter-spacing: 1px; /* Добавляем расстояние между буквами */
+}
 
 .club-rules ul {
-    list-style: disc;
-    margin-left: 20px;
+    list-style-type: none; /* Убираем стандартные маркеры */
+    padding-left: 0;
 }
 
 .club-rules li {
-    margin-bottom: 10px;
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    color: #555; /* Более мягкий цвет для текста */
+    margin-bottom: 15px; /* Добавляем отступы между пунктами */
+    line-height: 1.5; /* Увеличиваем межстрочный интервал для лучшей читаемости */
+    position: relative;
 }
+
+.club-rules li::before {
+    content: "•"; /* Добавляем кастомный маркер (круглый пункт) */
+    position: absolute;
+    left: -25px; /* Отступ слева, чтобы маркер не перекрывал текст */
+    font-size: 30px; /* Размер маркера */
+    color: #3498db; /* Цвет маркера */
+    top: 50%;
+    transform: translateY(-50%); /* Центрируем маркер по вертикали */
+}
+
+.club-rules li:hover {
+    color: #3498db; /* Цвет текста при наведении */
+    transform: translateX(5px); /* Легкое смещение текста при наведении */
+    transition: transform 0.3s ease, color 0.3s ease; /* Плавный переход */
+}
+
 

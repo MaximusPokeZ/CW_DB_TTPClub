@@ -34,7 +34,7 @@ const AdminPage = () => {
             </div>
             <div className="admin-actions">
                 <button onClick={() => navigate(`/admin/${username}/manage-users`)}>Управление пользователями</button>
-                <button onClick={() => navigate("/manage-tournaments")}>Управление событиями</button>
+                <button onClick={() => navigate(`/admin/${username}/manage-tournaments`)}>Управление событиями</button>
                 <button onClick={() => navigate("/reports")}>Отчеты</button>
             </div>
         </div>
