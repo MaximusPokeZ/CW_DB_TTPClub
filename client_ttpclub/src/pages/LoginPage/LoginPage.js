@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import {axiosInstance} from "../../config/Axios/axiosConfig";
 import "./Login.css";
 
 const LoginPage = () => {
@@ -18,10 +18,13 @@ const LoginPage = () => {
         };
 
         try {
-            const response = await axios.post("http://localhost:8080/api/v1/auth/login", loginData);
+            const response = await axiosInstance.post("http://localhost:8080/api/v1/auth/login", loginData);
             if (response.status === 200) {
                 console.log("Login successfuuuuuuuuuuul");
                 alert("Login successful!");
+                const { accessToken, refreshToken } = response.data;
+                localStorage.setItem("accessToken", accessToken);
+                localStorage.setItem("refreshToken", refreshToken);
                 localStorage.setItem("userEmail", email);
                 navigate("/main");
             } else {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { axiosInstance } from "../../../config/Axios/axiosConfig";
 import "./ManageUserPage.css";
 
 const UserManagement = () => {
@@ -18,7 +18,7 @@ const UserManagement = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/api/v1/user");
+            const response = await axiosInstance.get("http://localhost:8080/api/v1/user");
             setUsers(response.data);
         } catch (error) {
             console.error("Error fetching users", error);
@@ -45,10 +45,10 @@ const UserManagement = () => {
 
         try {
             if (isEditing) {
-                await axios.put(`http://localhost:8080/api/v1/user/update_user/${editingUserId}`, userData);
+                await axiosInstance.put(`http://localhost:8080/api/v1/user/update_user/${editingUserId}`, userData);
                 alert("User updated successfully!");
             } else {
-                await axios.post("http://localhost:8080/api/v1/user/register", userData);
+                await axiosInstance.post("http://localhost:8080/api/v1/user/register", userData);
                 alert("User added successfully!");
             }
             fetchUsers();
@@ -73,7 +73,7 @@ const UserManagement = () => {
     const handleDelete = async (userId) => {
         if (window.confirm("Are you sure you want to delete this user?")) {
             try {
-                await axios.delete(`http://localhost:8080/api/v1/user/delete_user/${userId}`);
+                await axiosInstance.delete(`http://localhost:8080/api/v1/user/delete_user/${userId}`);
                 alert("User deleted successfully!");
                 fetchUsers();
             } catch (error) {

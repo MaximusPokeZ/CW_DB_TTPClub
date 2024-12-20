@@ -10,7 +10,7 @@ const StartPage = () => {
     };
 
     const handleLoginClick = () => {
-        navigate('/login'); // Переход на страницу входа
+        navigate('/login');
     };
 
     return (

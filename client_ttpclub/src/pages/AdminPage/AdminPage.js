@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
+import { axiosInstance } from "../../config/Axios/axiosConfig";
 import "./AdminPage.css";
 
 const AdminPage = () => {
@@ -11,7 +11,7 @@ const AdminPage = () => {
     useEffect(() => {
         const fetchAdminData = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/api/v1/user/get_username/${username}`);
+                const response = await axiosInstance.get(`http://localhost:8080/api/v1/user/get_username/${username}`);
                 setUserData(response.data);
             } catch (error) {
                 console.error("Error fetching admin data", error);
