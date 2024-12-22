@@ -5,6 +5,8 @@ import "./ManageEvent.css";
 const ManageEvent = () => {
     const [events, setEvents] = useState([]);
 
+    const [coaches, setCoaches] = useState([]);
+
     // Общие данные события
     const [name, setName] = useState("");
     const [type, setEventType] = useState("");
@@ -37,8 +39,19 @@ const ManageEvent = () => {
         }
     };
 
+    const fetchCoaches = async () => {
+        try {
+            const response = await axiosInstance.get("http://localhost:8080/api/v1/user/get_coaches");
+            setCoaches(response.data);
+        } catch (error) {
+            console.error("Error fetching coaches", error);
+            alert("Error loading coaches.");
+        }
+    };
+
     useEffect(() => {
         fetchEvents();
+        fetchCoaches();
     }, []);
 
     const fetchTournamentDetails = async (eventId) => {
@@ -54,7 +67,22 @@ const ManageEvent = () => {
             console.error("Error fetching tournament details", error);
         }
     };
-    // Отправка формы
+
+    const fetchTrainingDetails = async (eventId) => {
+        try {
+            const response = await axiosInstance.get(
+                `http://localhost:8080/api/v1/trainings/${eventId}`
+            );
+            const training = response.data;
+            console.log(training);
+            setCoachId(training.coachId);
+            setTrainingType(training.trainingType);
+        } catch (error) {
+            console.error("Error fetching training", error);
+        }
+    }
+
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -82,8 +110,9 @@ const ManageEvent = () => {
                         maxParticipantRating,
                     });
                 } else if (type === "TRAINING") {
+                    console.log(editingEventId);
                     await axiosInstance.put(`http://localhost:8080/api/v1/trainings/${editingEventId}`, {
-                        editingEventId,
+                        eventId: editingEventId,
                         coachId,
                         trainingType,
                     });
@@ -134,8 +163,7 @@ const ManageEvent = () => {
         if (event.type === "TOURNAMENT") {
             await fetchTournamentDetails(event.id);
         } else if (event.type === "TRAINING") {
-            setCoachId(event.coachId);
-            setTrainingType(event.trainingType);
+           await fetchTrainingDetails(event.id);
         }
 
         setIsEditing(true);
@@ -179,7 +207,6 @@ const ManageEvent = () => {
             <div className="form-container">
                 <h3>{isEditing ? "Edit Event" : "Add New Event"}</h3>
                 <form className="event-form" onSubmit={handleSubmit}>
-                    {/* Общие поля */}
                     <div className="form-group">
                         <label htmlFor="name">Name:</label>
                         <input
@@ -251,13 +278,14 @@ const ManageEvent = () => {
                         />
                     </div>
 
-                    {/* Поля для турниров */}
                     {type === "TOURNAMENT" && (
                         <>
                             <div className="form-group">
                                 <label htmlFor="prizePool">Prize Pool:</label>
                                 <input
                                     type="number"
+                                    min="0"
+                                    max="100000"
                                     step="0.01"
                                     id="prizePool"
                                     value={prizePool}
@@ -285,6 +313,8 @@ const ManageEvent = () => {
                                 </label>
                                 <input
                                     type="number"
+                                    min="0"
+                                    max="2000"
                                     id="maxParticipantRating"
                                     value={maxParticipantRating}
                                     onChange={(e) =>
@@ -296,29 +326,40 @@ const ManageEvent = () => {
                         </>
                     )}
 
-                    {/* Поля для тренировок */}
                     {type === "TRAINING" && (
                         <>
                             <div className="form-group">
-                                <label htmlFor="coachId">Coach ID:</label>
-                                <input
-                                    type="number"
+                                <label htmlFor="coachId">Select Coach:</label>
+                                <select
                                     id="coachId"
                                     value={coachId}
                                     onChange={(e) => setCoachId(e.target.value)}
                                     required
-                                />
+                                    className="form-control"
+                                >
+                                    <option value="">-- Select Coach --</option>
+                                    {coaches.map((coach) => (
+                                        <option key={coach.id} value={coach.id}>
+                                            {coach.username}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="trainingType">Training Type:</label>
-                                <input
-                                    type="text"
+                                <select
                                     id="trainingType"
                                     value={trainingType}
                                     onChange={(e) => setTrainingType(e.target.value)}
                                     required
-                                />
+                                    className="form-control"
+                                >
+                                    <option value="">-- Select Type --</option>
+                                    <option value="INDIVIDUAL">Individual</option>
+                                    <option value="GROUP">Group</option>
+                                </select>
                             </div>
+
                         </>
                     )}
 
