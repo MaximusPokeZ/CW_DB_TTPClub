@@ -33,6 +33,7 @@ public class Event {
     TOURNAMENT
   }
 
+
   public Event() {}
   public Event (String name, EventType type, LocalDateTime startTime, LocalDateTime endTime, String location, Integer maxParticipants) {
     this.name = name;

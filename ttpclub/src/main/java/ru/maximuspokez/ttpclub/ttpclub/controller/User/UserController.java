@@ -54,6 +54,12 @@ public class UserController {
     return ResponseEntity.ok(user);
   }
 
+  @GetMapping("get_coaches")
+  public ResponseEntity<List<UserDto>> getCoaches() {
+    List<User> users = userService.getCoaches();
+    return ResponseEntity.ok(users.stream().map(UserDto::new).collect(Collectors.toList()));
+  }
+
   @GetMapping("get_phone/{phone}")
   public ResponseEntity<User> getUserByPhone(@PathVariable String phone) {
     User user = userService.getUserByPhone(phone);

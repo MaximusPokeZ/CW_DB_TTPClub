@@ -32,6 +32,11 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
+  public List<User> getCoaches() {
+    return userRepository.findAllByRole("coach");
+  }
+
+  @Override
   public List<User> getUsersSortedByRating() {
     return userRepository.findAllByOrderByRatingDesc();
   }

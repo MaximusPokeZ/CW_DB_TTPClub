@@ -12,6 +12,7 @@ import java.util.List;
 @Primary
 public interface UserRepository extends JpaRepository<User, Long> {
   List<User> findAllByOrderByRatingDesc();
+  List<User> findAllByRole(String role);
   User findByUsername(String username);
   User findByEmail(String email);
   User findByPhone(String phone);

@@ -43,7 +43,7 @@ create table if not exists tournament (
 create table if not exists training (
     event_id bigint primary key,                        
     coach_id bigint not null,                            
-    training_type varchar(50) not null,                  
+	training_type varchar(50) not null check (training_type in ('INDIVIDUAL', 'GROUP')),             
     CONSTRAINT fk_event FOREIGN KEY (event_id) REFERENCES Event(id) on delete cascade,
     CONSTRAINT fk_coach FOREIGN KEY (coach_id) REFERENCES "user"(id) on delete cascade
 );

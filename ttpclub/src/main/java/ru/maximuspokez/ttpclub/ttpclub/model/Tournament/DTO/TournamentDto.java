@@ -1,12 +1,7 @@
 package ru.maximuspokez.ttpclub.ttpclub.model.Tournament.DTO;
 
-import ru.maximuspokez.ttpclub.ttpclub.model.Event.Event;
-import ru.maximuspokez.ttpclub.ttpclub.model.Tournament.Tournament;
-
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class TournamentDto {
   private Long eventId;
