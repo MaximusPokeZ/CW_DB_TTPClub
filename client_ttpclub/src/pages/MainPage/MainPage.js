@@ -23,7 +23,7 @@ const MainPage = () => {
                 setRole(response.data.role);
             } catch (error) {
                 console.error("Error fetching user data", error);
-                alert("Не удалось загрузить данные пользователя.");
+                alert("Couldn't upload user data");
             }
         };
 
@@ -42,7 +42,7 @@ const MainPage = () => {
                 setUsers(userData);
             } catch (error) {
                 console.error("Error fetching users data", error);
-                alert("Не удалось загрузить данные пользователей.");
+                alert("Couldn't upload users data");
             }
         };
 
@@ -84,7 +84,7 @@ const MainPage = () => {
 
     const handleLogout = () => {
         localStorage.removeItem("userEmail");
-        alert("Вы успешно вышли из системы.");
+        alert("You have successfully logged out");
         navigate("/");
     };
 
@@ -151,13 +151,13 @@ const MainPage = () => {
                 </div>
 
                 <div className="center-actions">
-                    <button onClick={() => navigate("/equipment")}>Бронь оборудования</button>
-                    <button onClick={() => navigate("/trainings")}>Запись на тренировки</button>
-                    <button onClick={() => navigate("/tournaments")}>Запись на турниры</button>
+                    <button onClick={() => navigate("/equipment")}>Equipment reservations</button>
+                    <button onClick={() => navigate("/trainings")}>Sign up for training sessions</button>
+                    <button onClick={() => navigate("/tournaments")}>Sign up for tournaments</button>
                 </div>
 
                 <div className="ratings-list">
-                    <h2>Рейтинг пользователей</h2>
+                    <h2>User Rating</h2>
                     <div className="ratings-container">
                         {users.length > 0 ? (
                             users.map((user, index) => (
@@ -167,15 +167,14 @@ const MainPage = () => {
                                 </div>
                             ))
                         ) : (
-                            <p>Загрузка...</p>
+                            <p>Loading...</p>
                         )}
                     </div>
                 </div>
             </main>
 
-            {/* Галерея */}
             <div className="gallery-wrap">
-                <h2 className="gallery-title">Галерея</h2>
+                <h2 className="gallery-title">Gallery</h2>
                 <div className="gallery">
                     <div>
                         <span><img src="/images/image-1.png" alt="Изображение 1"/></span>
@@ -185,14 +184,13 @@ const MainPage = () => {
                 </div>
             </div>
 
-            {/* Наша команда */}
             <div className="our-team">
-                <h2>Наша команда</h2>
+                <h2>Our team</h2>
                 <div className="team-members">
                     {[
-                        {name: "Иван Иванов", role: "Главный тренер"},
-                        {name: "Ольга Смирнова", role: "Ассистент тренера"},
-                        {name: "Максим Петров", role: "Тренер"},
+                        {name: "Максим Заславцев", role: "Администратор"},
+                        {name: "Антон Заславцев", role: "Главный тренер"},
+                        {name: "Кто-то", role: "Тренер"},
                     ].map((coach, index) => (
                         <div key={index} className="team-member">
                             <div className="team-placeholder">Фото</div>
@@ -203,20 +201,19 @@ const MainPage = () => {
                 </div>
             </div>
 
-            {/* Правила клуба */}
             <div className="club-rules">
-                <h2>Правила клуба</h2>
+                <h2>Club rules</h2>
                 <ul>
-                    <li>Уважайте других участников и тренеров.</li>
-                    <li>Соблюдайте чистоту и порядок в помещении.</li>
-                    <li>Используйте оборудование только по назначению.</li>
-                    <li>Записывайтесь на тренировки и турниры заранее.</li>
-                    <li>Соблюдайте правила техники безопасности.</li>
+                    <li>Respect the other participants and coaches.</li>
+                    <li>Keep the room clean and tidy.</li>
+                    <li>Use the equipment only for its intended purpose.</li>
+                    <li>Sign up for training sessions and tournaments in advance.</li>
+                    <li>Follow the safety regulations.</li>
                 </ul>
             </div>
 
             <footer className="main-footer">
-                <p>Контакты: +7 916 624 06 71 | Адрес: г. Москва, ул. ПуПуПу, 52</p>
+                <p>Contacts: +7 916 624 06 71 | Address: Moscow, PuPuPu str., 52</p>
             </footer>
         </div>
     );
