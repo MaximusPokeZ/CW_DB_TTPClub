@@ -152,8 +152,8 @@ const MainPage = () => {
 
                 <div className="center-actions">
                     <button onClick={() => navigate("/equipment")}>Equipment reservations</button>
-                    <button onClick={() => navigate("/trainings")}>Sign up for training sessions</button>
-                    <button onClick={() => navigate("/tournaments")}>Sign up for tournaments</button>
+                    <button onClick={() => navigate("/trainings_reg")}>Sign up for training sessions</button>
+                    <button onClick={() => navigate("/tournaments_reg")}>Sign up for tournaments</button>
                 </div>
 
                 <div className="ratings-list">

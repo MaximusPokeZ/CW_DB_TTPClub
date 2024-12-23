@@ -65,7 +65,7 @@ const UserManagement = () => {
         setEmail(user.email);
         setPhone(user.phone);
         setRole(user.role);
-        setBirthDate(user.birthDate ? user.birthDate.split("T")[0] : ""); // Ensure date is in YYYY-MM-DD format
+        setBirthDate(user.birthDate ? user.birthDate.split("T")[0] : "");
         setRating(user.rating);
         setIsEditing(true);
     };
