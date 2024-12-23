@@ -188,12 +188,12 @@ const MainPage = () => {
                 <h2>Our team</h2>
                 <div className="team-members">
                     {[
-                        {name: "Максим Заславцев", role: "Администратор"},
-                        {name: "Антон Заславцев", role: "Главный тренер"},
-                        {name: "Кто-то", role: "Тренер"},
+                        {name: "Maxim Zaslavtsev", role: "Administrator"},
+                        {name: "Anton Zaslavtsev", role: "Head Coach"},
+                        {name: "Кто-то", role: "Coach"},
                     ].map((coach, index) => (
                         <div key={index} className="team-member">
-                            <div className="team-placeholder">Фото</div>
+                            <div className="team-placeholder">Photo</div>
                             <h3>{coach.name}</h3>
                             <p>{coach.role}</p>
                         </div>
