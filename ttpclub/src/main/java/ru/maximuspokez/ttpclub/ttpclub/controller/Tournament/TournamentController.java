@@ -6,6 +6,8 @@ import ru.maximuspokez.ttpclub.ttpclub.model.Tournament.DTO.TournamentDto;
 import ru.maximuspokez.ttpclub.ttpclub.model.Tournament.Tournament;
 import ru.maximuspokez.ttpclub.ttpclub.service.Tournament.TournamentsService;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -21,7 +23,9 @@ public class TournamentController {
   @GetMapping
   public ResponseEntity<List<TournamentDto>> findAll() {
     List<TournamentDto> tournaments = tournamentsService.getTournaments();
-    return ResponseEntity.ok(tournaments);
+    List<TournamentDto> mutableTournaments = new ArrayList<>(tournaments);
+    mutableTournaments.sort(Comparator.comparing(TournamentDto::getStartTime));
+    return ResponseEntity.ok(mutableTournaments);
   }
 
   @GetMapping("/{id}")

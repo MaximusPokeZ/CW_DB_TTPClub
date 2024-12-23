@@ -10,6 +10,4 @@ import java.util.List;
 @Repository
 @Primary
 public interface EventRepository extends JpaRepository<Event, Long> {
-  List<Event> findByNameContaining(String name);
-  //TODO
 }
