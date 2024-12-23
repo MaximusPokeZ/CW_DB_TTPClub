@@ -7,6 +7,7 @@ const MainPage = () => {
     const [username, setUsername] = useState("");
     const [role, setRole] = useState("");
     const [users, setUsers] = useState([]);
+    const [tournaments, setTournaments] = useState([]);
     const navigate = useNavigate();
 
     const email = localStorage.getItem("userEmail");
@@ -45,7 +46,28 @@ const MainPage = () => {
             }
         };
 
+        const fetchTournaments = async () => {
+            try {
+                const response = await axiosInstance.get("http://localhost:8080/api/v1/tournaments");
+                const tournamentsData = response.data.map(tournament => ({
+                    name: tournament.eventName,
+                    prizePool: tournament.prizePool,
+                    isTeamBased: tournament.isTeamBased,
+                    maxRating: tournament.maxParticipantRating,
+                    startTime: new Date(tournament.startTime),
+                    maxParticipants: tournament.maxParticipants,
+                }));
+                console.log("Processed tournament data:", tournamentsData);
+                setTournaments(tournamentsData);
+            } catch (error) {
+                console.error("Error when receiving tournament data:", error);
+                alert("Tournament data could not be uploaded");
+                return [];
+            }
+        };
+
         fetchUsers();
+        fetchTournaments();
     }, [email]);
 
 
@@ -83,8 +105,49 @@ const MainPage = () => {
 
             <main className="main-content">
                 <div className="tournaments-list">
-                    <h2>Список турниров</h2>
-                    {/* Добавьте компонент или код для отображения списка турниров */}
+                    <h2>Tournaments List</h2>
+                    <div className="tournaments-container">
+                        {tournaments.length > 0 ? (
+                            tournaments.map((tournament, index) => (
+                                <div className="tournament-item" key={index}>
+                                    <h3 className="tournament-name">{tournament.name}</h3>
+                                    <div className="tournament-details">
+                                        <p>
+                                            <strong>Prize Pool:</strong>{" "}
+                                            {new Intl.NumberFormat("en-US", {
+                                                style: "currency",
+                                                currency: "RUB",
+                                            }).format(tournament.prizePool)}
+                                        </p>
+                                        <p>
+                                            <strong>Team-Based:</strong>{" "}
+                                            {tournament.isTeamBased ? "Yes" : "No"}
+                                        </p>
+                                        <p>
+                                            <strong>Maximum Participant Rating:</strong>{" "}
+                                            {tournament.maxRating}
+                                        </p>
+                                        <p>
+                                            <strong>Start Date and Time:</strong>{" "}
+                                            {new Date(tournament.startTime).toLocaleString("en-US", {
+                                                year: "numeric",
+                                                month: "long",
+                                                day: "numeric",
+                                                hour: "2-digit",
+                                                minute: "2-digit",
+                                            })}
+                                        </p>
+                                        <p>
+                                            <strong>Maximum Number of Participants:</strong>{" "}
+                                            {tournament.maxParticipants}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <p>Loading...</p>
+                        )}
+                    </div>
                 </div>
 
                 <div className="center-actions">
@@ -126,7 +189,7 @@ const MainPage = () => {
             <div className="our-team">
                 <h2>Наша команда</h2>
                 <div className="team-members">
-                {[
+                    {[
                         {name: "Иван Иванов", role: "Главный тренер"},
                         {name: "Ольга Смирнова", role: "Ассистент тренера"},
                         {name: "Максим Петров", role: "Тренер"},

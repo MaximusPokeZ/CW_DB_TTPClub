@@ -44,7 +44,20 @@
     gap: 20px;
 }
 
-.tournaments-list,
+.tournaments-list{
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tournaments-list h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
 .ratings-list {
     margin-top: 30px;
     padding: 20px;
@@ -59,10 +72,13 @@
     color: #333;
 }
 
-.ratings-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+.ratings-container,
+.tournaments-container {
+    max-height: 400px;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f9f9f9;
 }
 
 .rating-item {
@@ -81,6 +97,52 @@
     background-color: #f1f1f1;
 }
 
+.tournament-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.tournament-item:hover {
+    transform: scale(1.05);
+    background-color: #f1f1f1;
+}
+
+.tournament-name {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #007BFF;
+    text-transform: capitalize;
+}
+
+.tournament-details {
+    font-size: 0.9em;
+    color: #555;
+    line-height: 1.6;
+}
+
+.tournament-details p {
+    margin: 8px 0;
+}
+
+.tournament-details strong {
+    color: #333;
+}
+
+.tournament-item:nth-child(odd) {
+    background-color: #fdfdfd;
+}
+
+.tournament-item:nth-child(even) {
+    background-color: #f7f7f7;
+}
+
 .rating-username {
     font-weight: 600;
     font-size: 18px;
@@ -97,7 +159,6 @@
     background-color: #f7f7f7;
 }
 
-/* Анимация для пустых данных (если еще идет загрузка) */
 p {
     font-size: 16px;
     color: #777;
