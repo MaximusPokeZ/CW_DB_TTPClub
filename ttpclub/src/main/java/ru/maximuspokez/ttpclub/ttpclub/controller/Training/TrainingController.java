@@ -2,7 +2,6 @@ package ru.maximuspokez.ttpclub.ttpclub.controller.Training;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.maximuspokez.ttpclub.ttpclub.model.Tournament.Tournament;
 import ru.maximuspokez.ttpclub.ttpclub.model.Training.DTO.TrainingDTO;
 import ru.maximuspokez.ttpclub.ttpclub.model.Training.Training;
 import ru.maximuspokez.ttpclub.ttpclub.service.Training.TrainingService;

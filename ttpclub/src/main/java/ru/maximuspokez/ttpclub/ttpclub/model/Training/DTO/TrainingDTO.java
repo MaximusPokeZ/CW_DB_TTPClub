@@ -5,18 +5,20 @@ import java.time.LocalDateTime;
 public class TrainingDTO {
   private Long eventId;
   private String eventName;
+  private String coachName;
   private LocalDateTime startTime;
   private LocalDateTime endTime;
   private Integer maxParticipants;
   private String type;
 
-  public TrainingDTO(Long eventId, String eventName, LocalDateTime startTime,  LocalDateTime endTime, Integer maxParticipants, String type) {
+  public TrainingDTO(Long eventId, String eventName, LocalDateTime startTime,  LocalDateTime endTime, Integer maxParticipants, String type, String coachName) {
     this.eventId = eventId;
     this.eventName = eventName;
     this.startTime = startTime;
     this.endTime = endTime;
     this.maxParticipants = maxParticipants;
     this.type = type;
+    this.coachName = coachName;
   }
 
   public Long getEventId() {
@@ -65,5 +67,13 @@ public class TrainingDTO {
 
   public void setType(String type) {
     this.type = type;
+  }
+
+  public String getCoachName() {
+    return coachName;
+  }
+
+  public void setCoachName(String coachName) {
+    this.coachName = coachName;
   }
 }

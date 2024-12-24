@@ -10,6 +10,7 @@ import ru.maximuspokez.ttpclub.ttpclub.model.Training.Training;
 import ru.maximuspokez.ttpclub.ttpclub.repository.Event.EventRepository;
 import ru.maximuspokez.ttpclub.ttpclub.repository.Tournament.TournamentRepository;
 import ru.maximuspokez.ttpclub.ttpclub.repository.Training.TrainingRepository;
+import ru.maximuspokez.ttpclub.ttpclub.repository.User.UserRepository;
 import ru.maximuspokez.ttpclub.ttpclub.service.Training.TrainingService;
 
 import java.util.List;
@@ -21,9 +22,12 @@ public class TrainingServiceImpl implements TrainingService {
 
   private final EventRepository eventRepository;
 
-  public TrainingServiceImpl(TrainingRepository trainingRepository, EventRepository eventRepository) {
+  private final UserRepository userRepository;
+
+  public TrainingServiceImpl(TrainingRepository trainingRepository, EventRepository eventRepository, UserRepository userRepository) {
     this.trainingRepository = trainingRepository;
     this.eventRepository = eventRepository;
+    this.userRepository = userRepository;
   }
 
   @Override
@@ -41,7 +45,8 @@ public class TrainingServiceImpl implements TrainingService {
             event.getStartTime(),
             event.getEndTime(),
             event.getMaxParticipants(),
-            training.getTrainingType().toString()
+            training.getTrainingType().toString(),
+            userRepository.findById(training.getCoachId()).get().getUsername()
     );
   }
 
