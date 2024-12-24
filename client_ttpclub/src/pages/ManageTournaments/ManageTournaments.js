@@ -6,6 +6,8 @@ const ManageTournaments = () => {
     const [tournaments, setTournaments] = useState([]);
     const [loading, setLoading] = useState(true);
     const [userId, setUserId] = useState("");
+    const [selectedTournament, setSelectedTournament] = useState(null);
+    const [registeredPlayers, setRegisteredPlayers] = useState([]);
 
     useEffect(() => {
         const fetchTournaments = async () => {
@@ -50,14 +52,45 @@ const ManageTournaments = () => {
                 userId: userId,
                 eventId: eventId,
             });
-            alert("Вы успешно зарегистрировались на турнир!");
+            alert("You have successfully registered for the tournament!");
         } catch (error) {
             console.error("Error during registration:", error);
-            alert(
-                `Error during registration: ${
-                    error.response?.data?.message || "Unexpected error"
-                }`
+            if (error.response && error.response.status === 409) {
+                alert("You are already registered for this event!");
+            } else {
+                alert("An error occurred during registration.");
+            }
+        }
+    };
+
+    const handleTournamentClick = async (tournamentId, tournamentName) => {
+        setSelectedTournament({ id: tournamentId, name: tournamentName });
+
+        try {
+            const response = await axiosInstance.get(
+                `http://localhost:8080/api/v1/registration/event/${tournamentId}`
             );
+            setRegisteredPlayers(response.data);
+        } catch (error) {
+            console.error("Error when fetching registered players:", error);
+            alert("Error fetching registered players");
+        }
+    };
+
+    const handleUnregister = async (userId, eventId) => {
+        try {
+            await axiosInstance.delete(`http://localhost:8080/api/v1/registration/delete/${userId}/${eventId}`);
+            alert("You have successfully unregistered from the training!");
+
+            if (selectedTournament) {
+                const response = await axiosInstance.get(
+                    `http://localhost:8080/api/v1/registration/event/${selectedTournament.id}`
+                );
+                setRegisteredPlayers(response.data);
+            }
+        } catch (error) {
+            console.error("Error during unregistration:", error);
+            alert("An error occurred during unregistration.");
         }
     };
 
@@ -71,7 +104,11 @@ const ManageTournaments = () => {
             <div className="tournaments-container">
                 {tournaments.length > 0 ? (
                     tournaments.map((tournament) => (
-                        <div className="tournament-item" key={tournament.id}>
+                        <div
+                            className="tournament-item"
+                            key={tournament.id}
+                            onClick={() => handleTournamentClick(tournament.id, tournament.name)}
+                        >
                             <h3 className="tournament-name">{tournament.name}</h3>
                             <div className="tournament-details">
                                 <p>
@@ -116,6 +153,44 @@ const ManageTournaments = () => {
                     <p>No tournaments available at the moment.</p>
                 )}
             </div>
+
+            {selectedTournament && (
+                <div className="tournament-players">
+                    <h2>Players in {selectedTournament.name}</h2>
+                    {registeredPlayers.length > 0 ? (
+                        <table className="players-table">
+                            <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Rating</th>
+                                <th>Age</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {registeredPlayers.map((player) => (
+                                <tr key={player.id}>
+                                    <td>{player.username}</td>
+                                    <td>{player.rating}</td>
+                                    <td>{player.age}</td>
+                                    <td>
+                                        {player.id === userId && (
+                                            <button
+                                                onClick={() => handleUnregister(player.id, selectedTournament.id)}
+                                                className="unregister-button"
+                                            >
+                                                Cancel Registration
+                                            </button>
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                    ) : (
+                        <p>No players have registered for this tournament yet.</p>
+                    )}
+                </div>
+            )}
         </div>
     );
 };
