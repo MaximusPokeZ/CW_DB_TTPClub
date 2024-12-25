@@ -48,4 +48,14 @@ public class BookingServiceImpl implements BookingService {
     }
     bookingRepository.delete(oldBooking);
   }
+
+  @Override
+  public void updateBookingStatus(Long id, String status) {
+    Booking oldBooking = bookingRepository.findById(id).orElse(null);
+    if (oldBooking == null) {
+      throw new IllegalArgumentException("Booking with ID " + id + " not found");
+    }
+    oldBooking.setStatus(status);
+    bookingRepository.save(oldBooking);
+  }
 }
