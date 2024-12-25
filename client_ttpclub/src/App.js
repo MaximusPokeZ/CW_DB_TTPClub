@@ -11,6 +11,7 @@ import setupAxiosInstance from "./config/Axios/axiosConfig";
 import ManageEvent from "./pages/AdminPage/ManageEvents/ManageEvent";
 import ManageTournaments from "./pages/ManageTournaments/ManageTournaments"
 import ManageTrainings from "./pages/ManageTrainings/ManageTrainings"
+import Booking from "./pages/ManageBooking/Booking";
 
 const App = () => {
     const navigate = useNavigate();
@@ -32,6 +33,7 @@ const App = () => {
             <Route path="/main" element={<MainPage />} />
             <Route path="/tournaments_reg" element={<ManageTournaments />} />
             <Route path="/trainings_reg" element={<ManageTrainings />} />
+            <Route path="/equipment" element={<Booking />} />
             <Route path="/admin/:username" element={<AdminPage />} />
             <Route path="/profile/:username" element={<ProfilePage />} />
             <Route path="/admin/:username/manage-users" element={<ManageUserPage />} />
