@@ -98,7 +98,7 @@ const MainPage = () => {
                 </span>
                     )}
                     <button className="logout-button" onClick={handleLogout}>
-                        Выйти
+                        Exit
                     </button>
                 </div>
             </header>
@@ -190,7 +190,7 @@ const MainPage = () => {
                     {[
                         {name: "Maxim Zaslavtsev", role: "Administrator"},
                         {name: "Anton Zaslavtsev", role: "Head Coach"},
-                        {name: "Кто-то", role: "Coach"},
+                        {name: "Julia", role: "Coach"},
                     ].map((coach, index) => (
                         <div key={index} className="team-member">
                             <div className="team-placeholder">Photo</div>

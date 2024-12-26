@@ -23,13 +23,13 @@ const StartPage = () => {
             boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
             fontFamily: 'Arial, sans-serif'
         }}>
-            <h1 style={{ color: '#333', marginBottom: '20px' }}>Добро пожаловать в TTP Club</h1>
+            <h1 style={{ color: '#333', marginBottom: '20px' }}>Welcome to TTP Club</h1>
             <p style={{ fontSize: '18px', color: '#666', marginBottom: '40px' }}>
-                Зарегистрируйтесь или войдите, чтобы стать частью нашего клуба!
+                Register or login to become part of our club!
             </p>
             <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
-                <Button onClick={handleRegistrationClick} text="Регистрация" />
-                <Button onClick={handleLoginClick} text="Войти" />
+                <Button onClick={handleRegistrationClick} text="Registration" />
+                <Button onClick={handleLoginClick} text="Login" />
             </div>
         </div>
     );

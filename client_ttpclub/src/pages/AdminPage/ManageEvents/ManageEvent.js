@@ -7,7 +7,6 @@ const ManageEvent = () => {
 
     const [coaches, setCoaches] = useState([]);
 
-    // Общие данные события
     const [name, setName] = useState("");
     const [type, setEventType] = useState("");
     const [description, setDescription] = useState("");
@@ -15,20 +14,16 @@ const ManageEvent = () => {
     const [endTime, setEndTime] = useState("");
     const [maxParticipants, setMaxParticipants] = useState("");
 
-    // Данные турнира
     const [prizePool, setPrizePool] = useState("");
     const [isTeamBased, setIsTeamBased] = useState(false);
     const [maxParticipantRating, setMaxParticipantRating] = useState("");
 
-    // Данные тренировки
     const [coachId, setCoachId] = useState("");
     const [trainingType, setTrainingType] = useState("");
 
-    // Состояние редактирования
     const [editingEventId, setEditingEventId] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
 
-    // Получение списка событий
     const fetchEvents = async () => {
         try {
             const response = await axiosInstance.get("http://localhost:8080/api/v1/events");

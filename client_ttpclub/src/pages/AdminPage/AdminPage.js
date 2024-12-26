@@ -6,7 +6,7 @@ import "./AdminPage.css";
 const AdminPage = () => {
     const { username } = useParams();
     const [userData, setUserData] = useState({});
-    const [selectedFile, setSelectedFile] = useState(null); // Состояние для выбранного файла
+    const [selectedFile, setSelectedFile] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -26,16 +26,16 @@ const AdminPage = () => {
     const handleDumpDatabase = async () => {
         try {
             await axiosInstance.get(`http://localhost:8080/api/v1/db/dump`);
-            alert(`Дамп базы данных сохранен`);
+            alert(`Database dump saved`);
         } catch (error) {
-            console.error("Ошибка при создании дампа", error);
-            alert("Ошибка при создании дампа базы данных.");
+            console.error("Error creating dump", error);
+            alert("Error creating database dump.");
         }
     };
 
     const handleRestoreDatabase = async () => {
         if (!selectedFile) {
-            alert("Пожалуйста, выберите файл для восстановления.");
+            alert("Please select a file to restore.");
             return;
         }
 
@@ -48,10 +48,10 @@ const AdminPage = () => {
                     "Content-Type": "multipart/form-data",
                 },
             });
-            alert("База данных успешно восстановлена.");
+            alert("The database was successfully restored.");
         } catch (error) {
-            console.error("Ошибка при восстановлении базы данных", error);
-            alert("Ошибка при восстановлении базы данных.");
+            console.error("Error while restoring database", error);
+            alert("Error while restoring database");
         }
     };
 
@@ -61,25 +61,25 @@ const AdminPage = () => {
 
     return (
         <div className="admin-page-container">
-            <h1>Страница администратора</h1>
+            <h1>Admin page</h1>
             <div className="admin-info">
-                <p><strong>Имя:</strong> {userData.username}</p>
+                <p><strong>Name:</strong> {userData.username}</p>
                 <p><strong>Email:</strong> {userData.email}</p>
-                <p><strong>Телефон:</strong> {userData.phone}</p>
-                <p><strong>Роль:</strong> {userData.role}</p>
-                <p><strong>Рейтинг:</strong> {userData.rating}</p>
+                <p><strong>Phone:</strong> {userData.phone}</p>
+                <p><strong>Role:</strong> {userData.role}</p>
+                <p><strong>Rating:</strong> {userData.rating}</p>
             </div>
             <div className="admin-actions">
-                <button onClick={() => navigate(`/admin/${username}/manage-users`)}>Управление пользователями</button>
-                <button onClick={() => navigate(`/admin/${username}/manage-tournaments`)}>Управление событиями</button>
+                <button onClick={() => navigate(`/admin/${username}/manage-users`)}>User Management</button>
+                <button onClick={() => navigate(`/admin/${username}/manage-tournaments`)}>Event Management</button>
                 <div>
-                    <h3>Сохранить дамп базы данных</h3>
-                    <button onClick={handleDumpDatabase}>Сохранить дамп</button>
+                    <h3>Save database dump</h3>
+                    <button onClick={handleDumpDatabase}>Save dump</button>
                 </div>
                 <div>
-                    <h3>Восстановить базу данных</h3>
+                    <h3>Restore Database</h3>
                     <input type="file" onChange={handleFileChange} />
-                    <button onClick={handleRestoreDatabase}>Восстановить дамп</button>
+                    <button onClick={handleRestoreDatabase}>Restore dump</button>
                 </div>
             </div>
         </div>

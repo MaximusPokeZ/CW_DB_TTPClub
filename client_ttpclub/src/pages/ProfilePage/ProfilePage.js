@@ -24,13 +24,13 @@ const ClientPage = () => {
 
     return (
         <div className="player-page-container">
-            <h1>Страница игрока</h1>
+            <h1>Player Page</h1>
             <div className="player-info">
-                <p><strong>Имя:</strong> {userData.username}</p>
+                <p><strong>Name:</strong> {userData.username}</p>
                 <p><strong>Email:</strong> {userData.email}</p>
-                <p><strong>Телефон:</strong> {userData.phone}</p>
-                <p><strong>Роль:</strong> {userData.role}</p>
-                <p><strong>Рейтинг:</strong> {userData.rating}</p>
+                <p><strong>Phone:</strong> {userData.phone}</p>
+                <p><strong>Role:</strong> {userData.role}</p>
+                <p><strong>Rating:</strong> {userData.rating}</p>
             </div>
         </div>
     );

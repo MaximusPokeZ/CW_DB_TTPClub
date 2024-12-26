@@ -13,6 +13,7 @@ const Booking = () => {
     const [availableTimes, setAvailableTimes] = useState([]);
     const [userId, setUserId] = useState("");
     const [isAdmin, setIsAdmin] = useState(false);
+    const [userNames, setUserNames] = useState({});
 
     const fetchEquipment = async () => {
         try {
@@ -47,11 +48,32 @@ const Booking = () => {
         }
     };
 
+    const fetchCrntUserData = async (id) => {
+        try {
+            const response = await axiosInstance.get(
+                `http://localhost:8080/api/v1/user/${id}`
+            );
+            setUserNames((prevState) => ({
+                ...prevState,
+                [id]: response.data.username,
+            }));
+        } catch (error) {
+            console.error("Error fetching user data:", error);
+            alert("Couldn't upload user data.");
+        }
+    };
+
     useEffect(() => {
         fetchEquipment();
         fetchUserData();
         fetchBookings();
     }, []);
+
+    useEffect(() => {
+        bookings.forEach((booking) => {
+            fetchCrntUserData(booking.userId);
+        });
+    }, [bookings]);
 
     useEffect(() => {
         const times = [];
@@ -96,7 +118,6 @@ const Booking = () => {
             startTime: `${selectedDate}T${formatTime(selectedTime)}`,
             endTime: `${selectedDate}T${formatTime(endTime)}`,
         };
-
 
         try {
             await axios.post("http://localhost:8080/api/v1/booking", bookingData);
@@ -219,8 +240,8 @@ const Booking = () => {
                         {bookings.map((booking) => (
                             <tr key={booking.id}>
                                 <td>{booking.id}</td>
-                                <td>{booking.userId}</td>
-                                <td>{booking.equipmentId}</td>
+                                <td>{userNames[booking.userId] || "Loading..."}</td>
+                                <td>{equipment.find(item => item.id === booking.equipmentId)?.name || "Loading..."}</td>
                                 <td>{booking.startTime}</td>
                                 <td>{booking.endTime}</td>
                                 <td>{booking.status}</td>

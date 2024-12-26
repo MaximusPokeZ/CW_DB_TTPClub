@@ -216,8 +216,12 @@ const UserManagement = () => {
                         <td>{user.rating}</td>
                         <td>{user.createdAt ? new Date(user.createdAt).toLocaleString() : ""}</td>
                         <td>
-                            <button onClick={() => handleEdit(user)}>Edit</button>
-                            <button onClick={() => handleDelete(user.id)}>Delete</button>
+                            {user.role !== "admin" && (
+                                <>
+                                    <button onClick={() => handleEdit(user)}>Edit</button>
+                                    <button onClick={() => handleDelete(user.id)}>Delete</button>
+                                </>
+                            )}
                         </td>
                     </tr>
                 ))}
